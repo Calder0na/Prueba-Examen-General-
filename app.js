@@ -77,3 +77,21 @@ document.getElementById("btn-limpiar").onclick = function () {
     tareas.length = 0;
     actualizarLista();
 };
+
+//ejercicio basico 2
+function distancia(str1, str2) {
+    let diferencia = 0;
+    //recorre la longitud mas laarga
+    const maxLong = Math.max(str1.length, str2.length);
+
+    for (let i = 0; i < maxLong; i++) {
+        if (str1[i] !== str2[i]) {
+            diferencia++;
+        }
+    }
+    return diferencia;
+}
+// CÓDIGO DE PRUEBA
+console.log(distancia("hola", "hola")) // 0
+console.log(distancia("sol", "tol")) // 1
+console.log(distancia("carro", "correr")) // 3
