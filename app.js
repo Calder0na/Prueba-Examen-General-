@@ -92,6 +92,28 @@ function distancia(str1, str2) {
     return diferencia;
 }
 // CÓDIGO DE PRUEBA
+console.log("Ejercicio básico 2")
 console.log(distancia("hola", "hola")) // 0
 console.log(distancia("sol", "tol")) // 1
 console.log(distancia("carro", "correr")) // 3
+
+//ejercicio 3 intermedio
+function myMethod (str){
+    let resultado = "";
+    let conteo = 1;
+
+    //recorrer
+
+    for(i = 0; i < str.length; i ++){
+        if(str[i] === str[i + 1]){ //si es igual al siguiente que aumente el conteo
+            conteo++;
+        } else {
+            resultado += str[i] + conteo; //letra más número
+            conteo = 1;
+        }
+    }
+    return resultado;
+}
+console.log("Ejercico intermedio 3")
+console.log(myMethod('aabcccccaaa')); // a2b1c5a3
+
