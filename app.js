@@ -168,3 +168,33 @@ function myMethod(responder){
     console.log(await myMethod(false)) // 'Error el servicio no está disponible'
 })();
 
+
+//Ejercicio avanzado 2
+// Implementar tu propia funcionalidad para generar eventos y escucharlos, es decir tu propia implementación de addEventListener y dispatchEvent
+
+const eventListeners = {};
+
+function myAddEventListener(eventName, callback){
+    //sino hay listeners para ese evento que se cree un array vacío
+    if(!eventListeners[eventName]){
+        eventListeners[eventName] = [];
+    }
+    eventListeners[eventName].push(callback);
+}
+function myDispatchEvent (eventName, payload){
+    //verifica si hay listeners registrados para ese evento 
+    const listeners = eventListeners[eventName];
+    if(listeners && listeners.length > 0){
+        //se ejecutan todos los callbacks registrados...
+        listeners.forEach(callback => {
+            //...pasando el payload
+            callback(payload);
+        });
+    }
+}
+myAddEventListener('my-event', ({data}) => {
+    console.log("Ejercicio avanzado 2")
+console.log('Hola mi nombre es ' + data.name + ' ' + data.last);
+}); // 'Hola mi nombres es Juan Gonzalez'
+myDispatchEvent('my-event', {data: {name: 'Juan', last: 'Gonzalez'}});
+
