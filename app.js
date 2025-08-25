@@ -117,3 +117,23 @@ function myMethod (str){
 console.log("Ejercico intermedio 3")
 console.log(myMethod('aabcccccaaa')); // a2b1c5a3
 
+//Ejercicio intermedio 4
+Array.prototype.myOwnReduce = function(callback, initialValue){
+    let acumulator = 0;
+    //ternario para comenzar desde el indice 2
+    let comienzo = initialValue !== undefined ? 0 : 2;
+
+    // se recorre el array desde el indice correspondiente
+    for(let i = comienzo; i < this.length; i++){
+        //se aplica la funcion callback con el orden que se espera
+        acumulator = callback(this[i], acumulator);
+    }
+    return acumulator;
+}
+const array = [1,2,3,4,5];
+const callback = (current, acumulator) => {
+acumulator+=current; 
+return acumulator;
+}
+console.log("Ejercicio intermedio 4")
+console.log(array.myOwnReduce(callback)) // 12
