@@ -137,3 +137,34 @@ return acumulator;
 }
 console.log("Ejercicio intermedio 4")
 console.log(array.myOwnReduce(callback)) // 12
+
+
+//Ejercicio avanzado 1
+// Escribir un programa que simule el request a un servicio mediante promesas(se puede usar el método RACE del prototipo de promesas), si el servicio responde antes de 12 segundos deberá de imprimir en pantalla el resultado de la respuesta del servicio, si el servicio no responde en 12 segundos, se deberá imprimir en pantalla un error diciendo que el servicio no funciona.
+
+function myMethod(responder){
+    //promesa que representa el servicio
+    const servicePromise = new Promise((resolve, reject) => {
+        if (responder) {
+        reject ('Esta es la respuesta del servicio');
+    } else {
+        reject ('Error el servicio no está disponible');
+    }
+    });
+    //promise Race con un timeout de 12 segundos
+    const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+            reject('error! el servicio no funciona');
+        }, 12000);
+    });
+    return Promise.race([servicePromise, timeoutPromise])
+    .then(result => result)
+    .catch(error => error);
+}
+//uso await para esperar a que la promesa se resuelva o se rechace
+(async () => {
+    console.log("Ejercicio avanzado 1")
+    console.log(await myMethod(true)) // 'Esta es la respuesta del servicio'
+    console.log(await myMethod(false)) // 'Error el servicio no está disponible'
+})();
+
